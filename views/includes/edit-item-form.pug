@@ -1,0 +1,17 @@
+tr
+    td 
+        input(type="text" class="form-control" name="name" value=`${product.name}`)
+    td 
+        input(type="number" class="form-control" name="quantity" value=`${product.quantity}`)
+    td 
+        select(name="unit" class="form-select")
+            option(selected) #{product.unit}
+            option(value="kg") kg
+            option(value="g") g
+            option(value="l") l
+            option(value="ml") ml
+            option(value="piece") piece
+    td
+        button(type="button" class="btn btn-outline-warning" hx-get=`http://localhost:3000/${product.id}`) Cancel
+    td
+        button(type="button" hx-confirm="Are you sure?" class="btn btn-success" hx-put=`http://localhost:3000/edit/${product.id}` hx-include="closest tr") Save

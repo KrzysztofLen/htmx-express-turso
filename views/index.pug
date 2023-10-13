@@ -1,0 +1,75 @@
+DOCTYPE(html)
+html(lang='en')
+    head
+        meta(charset='UTF-8')
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title Grocery List
+        link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous")
+        link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css")
+        link(rel="stylesheet" type="text/css" href="css/style.css")
+
+        script(src="https://unpkg.com/hyperscript.org@0.9.11")
+        script(src="https://unpkg.com/htmx.org@1.9.6" integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni" crossorigin="anonymous")
+    body
+        nav(class="flex nav")
+            i(class="bi bi-basket")
+            h1(class="h1 mb-0") Grocery List
+
+        div(class="container py-4 px-3 mx-auto")
+            form(
+                hx-post="http://localhost:3000/submit"
+                hx-swap="beforeend"
+                hx-target="#products"
+                class="mb-3 needs-validation"
+                _="on htmx:afterRequest target.reset()"
+            )
+                input(
+                    placeholder="Product name"
+                    type="text"
+                    name="name"
+                    id="name"
+                    class="form-control mb-3"
+                    hx-swap="this"
+                    required
+                )
+                input(
+                    placeholder="Product quantity"
+                    type="number"
+                    name="quantity"
+                    id="quantity"
+                    class="form-control mb-3"
+                    required
+                )
+
+                select(name="unit" class="form-select mb-3" required)
+                    option(selected) Choose unit
+                    option(value="kg") kg
+                    option(value="g") g
+                    option(value="l") l
+                    option(value="ml") ml
+                    option(value="piece") piece
+
+
+                button(type="submit" class="add-product btn btn-info") Add product
+                    i(class="bi bi-plus")
+        table(class="table table-striped")
+            thead
+                tr
+                    th(class="table-secondary") Product
+                    th(class="table-secondary") Quantity
+                    th(class="table-secondary") Unit
+                    th(class="table-secondary")
+                    th(class="table-secondary")
+            tbody(id="products" hx-target="closest tr" hx-swap="outerHTML")
+                each product in products
+                    tr
+                        td #{product.name}
+                        td #{product.quantity}
+                        td 
+                            span(class="badge bg-secondary") #{product.unit}
+                        td
+                            button(class="btn btn-primary" hx-get=`http://localhost:3000/edit-form/${product.id}`)
+                                i(class="bi bi-pencil")
+                        td
+                            button(class="btn btn-danger" hx-delete=`http://localhost:3000/delete/${product.id}`)
+                                i(class="bi bi-trash")

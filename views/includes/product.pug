@@ -1,0 +1,11 @@
+tr
+    td #{product.name}
+    td #{product.quantity}
+    td 
+        span(class="badge bg-secondary") #{product.unit}
+    td
+        button(class="btn btn-primary" hx-get=`http://localhost:3000/edit-form/${product.id}`)
+            i(class="bi bi-pencil")
+    td
+        button(class="btn btn-danger" hx-delete=`http://localhost:3000/delete/${product.id}`)
+            i(class="bi bi-trash")

@@ -1,0 +1,29 @@
+td {
+    vertical-align: middle;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav {
+    padding: 0.5rem 0;
+    background-color: var(--bs-teal);
+}
+
+.nav i {
+    font-size: 2rem;
+    margin-right: 2rem;
+}
+
+.add-product {
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.add-product i {
+    font-size: 1.5rem;
+}
