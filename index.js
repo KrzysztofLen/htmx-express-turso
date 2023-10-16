@@ -4,14 +4,12 @@ const db = require("./db/config");
 const crypto = require("crypto");
 const pug = require("pug");
 
-const cors = require("cors");
 const bodyParser = require("body-parser");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
-app.use(cors());
 app.use(express.static(__dirname + "/public"));
 
 app.set("view engine", "pug");
@@ -66,7 +64,7 @@ app.post("/submit", async (req, res) => {
  * @name :id
  * @type GET
  */
-app.get("/:id", async (req, res) => {
+app.get("/product/:id", async (req, res) => {
 	const id = req.params.id;
 	const template = pug.compileFile("views/includes/product.pug");
 
@@ -91,7 +89,7 @@ app.get("/:id", async (req, res) => {
  */
 app.get("/edit-form/:id", async (req, res) => {
 	const id = req.params.id;
-	const template = pug.compileFile("views/includes/edit-item-form.pug");
+	const template = pug.compileFile("views/includes/edit-product-form.pug");
 
 	try {
 		const productData = await db.execute(
@@ -120,7 +118,7 @@ app.put("/edit/:id", async (req, res) => {
 		unit: req.body.unit,
 	};
 
-	const template = pug.compileFile("views/includes/edit-item.pug");
+	const template = pug.compileFile("views/includes/edit-product.pug");
 
 	try {
 		await db

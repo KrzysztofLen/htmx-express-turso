@@ -12,6 +12,6 @@ tr
             option(value="ml") ml
             option(value="piece") piece
     td
-        button(type="button" class="btn btn-outline-warning" hx-get=`http://localhost:3000/${product.id}`) Cancel
+        button(type="button" class="btn btn-outline-warning" hx-get=`/product/${product.id}`) Cancel
     td
-        button(type="button" hx-confirm="Are you sure?" class="btn btn-success" hx-put=`http://localhost:3000/edit/${product.id}` hx-include="closest tr") Save
+        button(type="button" hx-confirm="Are you sure?" class="btn btn-success" hx-put=`/edit/${product.id}` hx-include="closest tr") Save
