@@ -4,3 +4,4 @@ Welcome to a step-by-step guide to building full-stack application using three t
 
 [Full Stack Application – HTMX + ExpressJS + Turso: A Step-by-Step Guide](https://www.fun4code.com/htmx-expressjs-a-step-by-step-guide/)
 
+![grocery-list-app](grocery-list-app.gif)
